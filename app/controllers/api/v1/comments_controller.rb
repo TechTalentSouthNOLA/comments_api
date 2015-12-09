@@ -15,5 +15,18 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
+    @comment = Comment.new(comment_params)
+
+    if @comment.save
+      redirect_to api_v1_comment_url @comment[:product_id]
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def comment_params
+    params.permit(:author, :product_id, :content)
   end
 end
