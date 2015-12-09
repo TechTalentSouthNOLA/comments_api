@@ -1,1 +1,4 @@
-json.extract! @api_v1_comment, :id, :created_at, :updated_at
+json.id = @product["id"]
+json.name = @product["name"]
+json.price = @product["price"]
+json.comments = @product[:comments]

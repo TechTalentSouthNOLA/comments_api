@@ -9,6 +9,9 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def show
+    product = HTTParty.get('http://localhost:3000/api/v1/products/' + params[:id].to_s)
+    product[:comments] = Comment.where(product_id: product["id"])
+    @product = product
   end
 
   def create
